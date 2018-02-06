@@ -34,7 +34,7 @@ Respuesta
 
 5. Para encontrar imagenes duplicadas de utilizó el siguiente script
 
-	```#!/bin/bash
+	``` #!/bin/bash
 
 	cd .
 
@@ -47,10 +47,24 @@ Respuesta
 
 	echo $? estan repetidas
 
-	done```
+	done ```
 
 	El comando ``cksum`` nos permite saber cuales imagenes son iguales debido al contenido ya que este numero es diferente al de cualquier otro archivo si su contenido es diferente. Los nombres de los archivos repetidos se guardan en un archivo de texto llamado repetidas.txt
 
 6. Se descargó la base de datos bsds500 usando el comando "wget" con el link de descarga y se descomprimió usando el comando "tar".
 
-7. 
+7.El tamaño total de la carpeta BSR es de 12K. Esto se obtuvo con el comando "ls -lh".  
+
+Utilizando el comando "ls -1 | wc -l" en cada una de las 3 carpetas que contienen las imágenes, se obtuvo un total de 300 imágenes, distribuidas de la siguiente manera:
+
+	test: 200 imágenes
+	train: 200 imágenes
+	val: 100 imágenes 
+
+8. Todas las imágenes están en formato JPG y su resolución es 321x481 o 481x321. Para las resoluciones, se utilizó el comando "identify * |grep -o "[[:digit:]]*x[[:digit:]]*", el cual da una lista con las dimansiones de cada imagen. (http://www.upubuntu.com/2012/02/how-to-check-image-resolution-using.html).
+
+9. Para encontrar las imágenes en sentido landscape, se utilizó el comando find . -name '*.jpg' -exec file {} \; | sed 's/\(.*jpg\): .* \([0-9]* x [0-9]*\).*/\2 \1/' | awk 'int($1) < 400 {print}' (https://unix.stackexchange.com/questions/52906/find-images-by-size-find-file-awk).
+	
+	En este, se da la lista de imágenes con altura menor a 400, sabiendo que en este caso serán las que están en sentido landscape. 
+
+10. Para cambiar el tamaño de las imágenes, se utilizó el siguiente comando: "for file in *.jpg; do convert -resize 256x256 -- "$file" "${file%%.jpg}-resized.jpg"; done", con el cual se cambian los tamaños de las imágenes a 256x256. (https://stackoverflow.com/questions/561895/resize-a-list-of-images-in-line-command)
