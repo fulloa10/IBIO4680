@@ -32,7 +32,25 @@ Respuesta
 	vision /bin/bash``
 
 
-5. 
+5. Para encontrar imagenes duplicadas de utilizó el siguiente script
+
+	``
+	#!/bin/bash
+
+	cd .
+
+	rep=$(cksum * | cut -f 1 -d ' ' | uniq -d)
+
+	for nom in ${rep[*]}
+	do
+
+	   cksum * | cut -f 1,3 -d ' ' | grep $nom | cut -f 2 -d ' ' >> repetidas.txt
+
+	echo $? estan repetidas
+
+	done``
+
+	El comando ``cksum`` nos permite saber cuales imagenes son iguales debido al contenido ya que este numero es diferente al de cualquier otro archivo si su contenido es diferente. Los nombres de los archivos repetidos se guardan en un archivo de texto llamado repetidas.txt
 
 6. Se descargó la base de datos bsds500 usando el comando "wget" con el link de descarga y se descomprimió usando el comando "tar".
 
