@@ -34,8 +34,7 @@ Respuesta
 
 5. Para encontrar imagenes duplicadas de utilizó el siguiente script
 
-	``
-	#!/bin/bash
+	```#!/bin/bash
 
 	cd .
 
@@ -48,7 +47,7 @@ Respuesta
 
 	echo $? estan repetidas
 
-	done``
+	done```
 
 	El comando ``cksum`` nos permite saber cuales imagenes son iguales debido al contenido ya que este numero es diferente al de cualquier otro archivo si su contenido es diferente. Los nombres de los archivos repetidos se guardan en un archivo de texto llamado repetidas.txt
 
